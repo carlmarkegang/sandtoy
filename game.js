@@ -82,4 +82,4 @@ function updatePixels() {
 
 }
 
-myInterval = setInterval(updatePixels, 100);
+myInterval = setInterval(updatePixels, 60);
