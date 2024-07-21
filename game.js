@@ -20,7 +20,7 @@ function setup() {
             backgroundPixels.push(new create_backgroundPixel(x, y, "sky"));
         }
     }
-    frameRate(50)
+    frameRate(20)
 }
 
 
