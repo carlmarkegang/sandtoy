@@ -1,7 +1,8 @@
 
 let backgroundPixels = [];
 let range = 2;
-let quality = 80;
+let quality = 60;
+let selectedType = "sand";
 
 function create_backgroundPixel(x, y, type) {
     this.x = x;
@@ -14,13 +15,15 @@ function create_backgroundPixel(x, y, type) {
 
 
 function setup() {
-    createCanvas(quality, quality);
+    var canvas = createCanvas(quality, quality);
+    canvas.parent('sketch-holder');
+
     for (let x = 0; x < quality; x++) {
         for (let y = 0; y < quality; y++) {
             backgroundPixels.push(new create_backgroundPixel(x, y, "sky"));
         }
     }
-    frameRate(20)
+    frameRate(20);
 }
 
 
@@ -37,9 +40,14 @@ function draw() {
             fill(color(218, 247, 166));
         }
 
+        if (backgroundPixels[i].type == "water") {
+            fill(color(70, 130, 180));
+        }
+
+
         if (mouseIsPressed) {
             if (floor(mouseX) == backgroundPixels[i].x && floor(mouseY) == backgroundPixels[i].y) {
-                backgroundPixels[i].type = "sand"
+                backgroundPixels[i].type = selectedType;
             }
         }
 
@@ -84,6 +92,14 @@ function updatePixels() {
                 continue;
             }
 
+            if (pixelUnder.type == "water") {
+                pixelUnder.type = "sand";
+                backgroundPixels[i].type = "water";
+                pixelUnder.updatedInCycle = true;
+                backgroundPixels[i].updatedInCycle = true;
+                continue;
+            }
+
             if (pixelUnder.type == "sand" && pixelLeft.type == "sky" && pixelUnderLeft.type == "sky") {
                 pixelUnderLeft.type = "sand";
                 backgroundPixels[i].type = "sky";
@@ -100,6 +116,36 @@ function updatePixels() {
                 backgroundPixels[i].updatedInCycle = true;
                 continue;
             }
+
+        }
+
+        if (backgroundPixels[i].type == "water") {
+            if (pixelUnder.type == "sky") {
+                pixelUnder.type = "water";
+                backgroundPixels[i].type = "sky";
+                pixelUnder.updatedInCycle = true;
+                backgroundPixels[i].updatedInCycle = true;
+                continue;
+            }
+
+            if (randomInt(0, 1) == 0) {
+                if (pixelLeft.type == "sky") {
+                    pixelLeft.type = "water";
+                    backgroundPixels[i].type = "sky";
+                    pixelLeft.updatedInCycle = true;
+                    backgroundPixels[i].updatedInCycle = true;
+                    continue;
+                }
+            } else {
+                if (pixelRight.type == "sky") {
+                    pixelRight.type = "water";
+                    backgroundPixels[i].type = "sky";
+                    pixelRight.updatedInCycle = true;
+                    backgroundPixels[i].updatedInCycle = true;
+                    continue;
+                }
+            }
+
 
         }
     }
@@ -165,7 +211,7 @@ function getPixelsAround(backgroundPixel) {
 }
 
 
-myInterval = setInterval(updatePixels, 100);
+myInterval = setInterval(updatePixels, 80);
 
 
 function randomInt(min, max) {

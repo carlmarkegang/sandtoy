@@ -22,7 +22,13 @@
 
 <body>
     <script src="game.js"></script>
-    <div>Hold mouse down to add sand</div>
+    <div>Hold mouse down to add sand or water</div>
+
+    <div id="sketch-holder">
+        <!-- Our sketch will go here! -->
+      </div>
+
+      <div><button onclick="selectedType = 'sand'">Sand</button><button onclick="selectedType = 'water'">Water</button><button onclick="selectedType = 'sky'">Erase</button></div>
 </body>
 
 
