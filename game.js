@@ -214,6 +214,14 @@ function getPixelsAround(backgroundPixel) {
 myInterval = setInterval(updatePixels, 80);
 
 
+function removeType(type) {
+    for (let i = 0; i < backgroundPixels.length; i++) {
+        if (backgroundPixels[i].type == type) {
+            backgroundPixels[i].type = "sky"
+        }
+    }
+}
+
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
