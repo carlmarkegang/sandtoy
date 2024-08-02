@@ -28,9 +28,17 @@
         <!-- Our sketch will go here! -->
       </div>
 
-      <div><button onclick="selectedType = 'sand'">Sand</button><button onclick="selectedType = 'water'">Water</button><button onclick="selectedType = 'sky'">Erase</button></div>
-      <div><button onclick="removeType('sand')">Remove all Sand</button><button onclick="removeType('water')">Remove all Water</button></div>
+      <div><button onclick="selectedType = sand">Sand</button><button onclick="selectedType = water">Water</button><button onclick="selectedType = sky">Erase</button></div>
+      <div><button onclick="removeType(sand)">Remove all Sand</button><button onclick="removeType(water)">Remove all Water</button></div>
       <div><button onclick="randomPattern()">Generate random pattern</button></div>
+
+      <div>Quality:
+        <div>
+            30<input type="radio" name="Quality" onclick="quality = 30;setup();">
+            60<input type="radio" name="Quality" onclick="quality = 60;setup();" checked>
+            80<input type="radio" name="Quality" onclick="quality = 80;setup();">
+        </div>
+      </div>
 </body>
 
 
