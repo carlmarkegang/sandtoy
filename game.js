@@ -1,8 +1,12 @@
+var sky = 1;
+var sand = 2;
+var water = 3;
 
-let backgroundPixels = [];
-let range = 2;
-let quality = 60;
-let selectedType = "sand";
+var backgroundPixels = [];
+var quality = 60;
+var selectedType = sand;
+
+
 
 function create_backgroundPixel(x, y, type) {
     this.x = x;
@@ -18,9 +22,11 @@ function setup() {
     var canvas = createCanvas(quality, quality);
     canvas.parent('sketch-holder');
 
+    backgroundPixels = [];
+
     for (let x = 0; x < quality; x++) {
         for (let y = 0; y < quality; y++) {
-            backgroundPixels.push(new create_backgroundPixel(x, y, "sky"));
+            backgroundPixels.push(new create_backgroundPixel(x, y, sky));
         }
     }
     frameRate(20);
@@ -32,15 +38,15 @@ function draw() {
     noStroke();
 
     for (let i = 0; i < backgroundPixels.length; i++) {
-        if (backgroundPixels[i].type == "sky") {
+        if (backgroundPixels[i].type == sky) {
             fill(color(137, 207, 240));
         }
 
-        if (backgroundPixels[i].type == "sand") {
+        if (backgroundPixels[i].type == sand) {
             fill(color(218, 247, 166));
         }
 
-        if (backgroundPixels[i].type == "water") {
+        if (backgroundPixels[i].type == water) {
             fill(color(70, 130, 180));
         }
 
@@ -67,7 +73,7 @@ function updatePixels() {
 
     for (let i = 0; i < backgroundPixels.length; i++) {
 
-        if (backgroundPixels[i].type == "sky") {
+        if (backgroundPixels[i].type == sky) {
             continue;
         }
 
@@ -83,35 +89,35 @@ function updatePixels() {
         var pixelUnderRight = getPixelAround[4];
 
 
-        if (backgroundPixels[i].type == "sand") {
-            if (pixelUnder.type == "sky") {
-                pixelUnder.type = "sand";
-                backgroundPixels[i].type = "sky";
+        if (backgroundPixels[i].type == sand) {
+            if (pixelUnder.type == sky) {
+                pixelUnder.type = sand;
+                backgroundPixels[i].type = sky;
                 pixelUnder.updatedInCycle = true;
                 backgroundPixels[i].updatedInCycle = true;
                 continue;
             }
 
-            if (pixelUnder.type == "water") {
-                pixelUnder.type = "sand";
-                backgroundPixels[i].type = "water";
+            if (pixelUnder.type == water) {
+                pixelUnder.type = sand;
+                backgroundPixels[i].type = water;
                 pixelUnder.updatedInCycle = true;
                 backgroundPixels[i].updatedInCycle = true;
                 continue;
             }
 
-            if (pixelUnder.type == "sand" && pixelLeft.type == "sky" && pixelUnderLeft.type == "sky") {
-                pixelUnderLeft.type = "sand";
-                backgroundPixels[i].type = "sky";
+            if (pixelUnder.type == sand && pixelLeft.type == sky && pixelUnderLeft.type == sky) {
+                pixelUnderLeft.type = sand;
+                backgroundPixels[i].type = sky;
                 pixelUnderLeft.updatedInCycle = true;
                 backgroundPixels[i].updatedInCycle = true;
                 continue;
             }
 
 
-            if (pixelUnder.type == "sand" && pixelRight.type == "sky" && pixelUnderRight.type == "sky") {
-                pixelUnderRight.type = "sand";
-                backgroundPixels[i].type = "sky";
+            if (pixelUnder.type == sand && pixelRight.type == sky && pixelUnderRight.type == sky) {
+                pixelUnderRight.type = sand;
+                backgroundPixels[i].type = sky;
                 pixelUnderRight.updatedInCycle = true;
                 backgroundPixels[i].updatedInCycle = true;
                 continue;
@@ -119,27 +125,27 @@ function updatePixels() {
 
         }
 
-        if (backgroundPixels[i].type == "water") {
-            if (pixelUnder.type == "sky") {
-                pixelUnder.type = "water";
-                backgroundPixels[i].type = "sky";
+        if (backgroundPixels[i].type == water) {
+            if (pixelUnder.type == sky) {
+                pixelUnder.type = water;
+                backgroundPixels[i].type = sky;
                 pixelUnder.updatedInCycle = true;
                 backgroundPixels[i].updatedInCycle = true;
                 continue;
             }
 
             if (randomInt(0, 1) == 0) {
-                if (pixelLeft.type == "sky") {
-                    pixelLeft.type = "water";
-                    backgroundPixels[i].type = "sky";
+                if (pixelLeft.type == sky) {
+                    pixelLeft.type = water;
+                    backgroundPixels[i].type = sky;
                     pixelLeft.updatedInCycle = true;
                     backgroundPixels[i].updatedInCycle = true;
                     continue;
                 }
             } else {
-                if (pixelRight.type == "sky") {
-                    pixelRight.type = "water";
-                    backgroundPixels[i].type = "sky";
+                if (pixelRight.type == sky) {
+                    pixelRight.type = water;
+                    backgroundPixels[i].type = sky;
                     pixelRight.updatedInCycle = true;
                     backgroundPixels[i].updatedInCycle = true;
                     continue;
@@ -217,7 +223,7 @@ myInterval = setInterval(updatePixels, 80);
 function removeType(type) {
     for (let i = 0; i < backgroundPixels.length; i++) {
         if (backgroundPixels[i].type == type) {
-            backgroundPixels[i].type = "sky"
+            backgroundPixels[i].type = sky;
         }
     }
 }
@@ -227,13 +233,13 @@ function randomPattern() {
     var randomPixel = "";
 
     for (let i = 0; i < backgroundPixels.length; i++) {
-        backgroundPixels[i].type = "sky";
+        backgroundPixels[i].type = sky;
     }
 
     if (randomInt(0, 1) == 0) {
-        randomPixel = "sand";
+        randomPixel = sand;
     } else {
-        randomPixel = "water";
+        randomPixel = water;
     }
 
     if (randomInteger == 1) {
@@ -246,19 +252,19 @@ function randomPattern() {
     if (randomInteger == 2) {
         for (let i = 0; i < backgroundPixels.length; i++) {
             if (randomInt(0, 1) == 0) {
-                backgroundPixels[i].type = "sand";
+                backgroundPixels[i].type = sand;
             } else {
-                backgroundPixels[i].type = "water";
+                backgroundPixels[i].type = water;
             }
         }
     }
 
     if (randomInteger == 3) {
-        for (let i = 0; i < 2500; i++) {
+        for (let i = 0; i < (backgroundPixels.length / 2); i++) {
             if (i.toString().includes(1)) {
-                backgroundPixels[i].type = "sand"
+                backgroundPixels[i].type = sand;
             } else {
-                backgroundPixels[i].type = "water"
+                backgroundPixels[i].type = water;
             }
         }
     }
