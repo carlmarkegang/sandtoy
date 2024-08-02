@@ -60,13 +60,11 @@ function draw() {
         rect(backgroundPixels[i].x, backgroundPixels[i].y, backgroundPixels[i].width, backgroundPixels[i].height);
     }
 
+    requestAnimationFrame(updatePixelsPos);
 }
 
 
-
-
-
-function updatePixels() {
+function updatePixelsPos() {
     for (let i = 0; i < backgroundPixels.length; i++) {
         backgroundPixels[i].updatedInCycle = false;
     }
@@ -156,7 +154,7 @@ function updatePixels() {
         }
     }
 
-    return;
+
 
 }
 
@@ -216,10 +214,6 @@ function getPixelsAround(backgroundPixel) {
     return PixelArray;
 }
 
-
-myInterval = setInterval(updatePixels, 80);
-
-
 function removeType(type) {
     for (let i = 0; i < backgroundPixels.length; i++) {
         if (backgroundPixels[i].type == type) {
@@ -274,3 +268,7 @@ function randomPattern() {
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+
+
+updatePixelsPos();
