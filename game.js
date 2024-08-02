@@ -253,9 +253,9 @@ function randomPattern() {
         }
     }
 
-    if (randomInteger == 3){
-        for (let i = 0; i < backgroundPixels.length; i++) {
-            if(i.toString().includes(1)){
+    if (randomInteger == 3) {
+        for (let i = 0; i < 3000; i++) {
+            if (i.toString().includes(1)) {
                 backgroundPixels[i].type = "sand"
             } else {
                 backgroundPixels[i].type = "water"
