@@ -22,14 +22,14 @@
 
 <body>
     <script src="game.js"></script>
-    <div>Hold mouse down to add sand or water</div>
+    <div>Hold mouse down to add sand, water or walls</div>
 
     <div id="sketch-holder">
         <!-- Our sketch will go here! -->
       </div>
 
-      <div><button onclick="selectedType = sand">Sand</button><button onclick="selectedType = water">Water</button><button onclick="selectedType = sky">Erase</button></div>
-      <div><button onclick="removeType(sand)">Remove all Sand</button><button onclick="removeType(water)">Remove all Water</button></div>
+      <div><button onclick="changeSelectedType(sand, this)" class="selectedTypeButton">Sand</button><button onclick="changeSelectedType(water, this)" class="selectedTypeButton">Water</button><button onclick="changeSelectedType(wall, this)" class="selectedTypeButton">Wall</button><button onclick="changeSelectedType(sky, this)" class="selectedTypeButton">Erase</button></div>
+      <div><button onclick="removeType(sand)">Remove all Sand</button><button onclick="removeType(water)">Remove all Water</button><button onclick="removeType(wall)">Remove all wall</button></div>
       <div><button onclick="randomPattern()">Generate random pattern</button></div>
 
       <div>Quality:

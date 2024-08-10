@@ -1,6 +1,7 @@
 var sky = 1;
 var sand = 2;
 var water = 3;
+var wall = 4;
 
 var backgroundPixels = [];
 var quality = 60;
@@ -50,6 +51,9 @@ function draw() {
             fill(color(70, 130, 180));
         }
 
+        if (backgroundPixels[i].type == wall) {
+            fill(color(50, 50, 50));
+        }
 
         if (mouseIsPressed) {
             if (floor(mouseX) == backgroundPixels[i].x && floor(mouseY) == backgroundPixels[i].y) {
@@ -267,6 +271,15 @@ function randomPattern() {
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function changeSelectedType(changeSelectedType, thisElement) {
+    selectedType = changeSelectedType;
+    var selectedTypeButtons = document.querySelectorAll('.selectedTypeButton');
+    selectedTypeButtons.forEach(element => {
+        element.style.background = "rgb(240, 240, 240)";
+    });
+    thisElement.style.background = "lightgreen";
 }
 
 
